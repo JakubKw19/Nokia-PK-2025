@@ -8,34 +8,46 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
         working-directory: src
-        
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v2
-    - name: cmake
-      run: cmake .
-    - name: make all targets
-      run: make all
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: UT for BtsApplication
-      run: make BtsApplicationUT 
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential cmake
 
-    - name: run BTS ut
-      run: ./BTS/Tests/Application/BtsApplicationUT
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
 
-    - name: UT for COMMON
-      run: make COMMON_UT
+      - name: Configure CMake
+        run: cmake .
 
-    - name: UT for UeApplication
-      run: make UeApplicationUT
+      - name: Build All Targets
+        run: make all
 
-    - name: Next Steps
-      run: echo "Add your next steps here"
+      - name: Run Unit Tests
+        run: |
+          make BtsApplicationUT && ./BTS/Tests/Application/BtsApplicationUT
+          make COMMON_UT && ./COMMON/Tests/CommonUT
+          make UeApplicationUT && ./UE/Tests/UeApplicationUT
 
+      - name: Run Static Analysis (cppcheck)
+        run: |
+          sudo apt-get install -y cppcheck
+          cppcheck --enable=all --error-exitcode=1 --inconclusive --quiet .
+
+      - name: Run Code Formatting Check (clang-format)
+        run: |
+          sudo apt-get install -y clang-format
+          find . -iname "*.h" -o -iname "*.cpp" | xargs clang-format -i
+          git diff --exit-code
+
+      - name: Run Memory Checks (Valgrind)
+        run: |
+          sudo apt-get install -y valgrind
+          valgrind --leak-check=full --error-exitcode=1 ./BTS/Tests/Application/BtsApplicationUT
