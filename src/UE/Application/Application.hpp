@@ -28,7 +28,7 @@ public:
     void handleSib(common::BtsId btsId) override;
     void handleAttachAccept() override;
     void handleAttachReject() override;
-
+    void handleComposeSms(common::PhoneNumber to, const std::string &text) override;
 private:
     Context context;
     common::PrefixedLogger logger;

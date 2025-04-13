@@ -18,12 +18,21 @@ public:
     void showNotConnected() override;
     void showConnecting() override;
     void showConnected() override;
-
+    // common::PhoneNumber getRecipientPhoneNumber() const
+    // {
+    //     return this->to;
+    // }
+    // string getSmsText() const
+    // {
+    //     return this->message;
+    // }
 private:
     common::PrefixedLogger logger;
     IUeGui& gui;
     common::PhoneNumber phoneNumber;
     IUserEventsHandler* handler = nullptr;
+    common::PhoneNumber to;
+    std::string message;
 };
 
 }

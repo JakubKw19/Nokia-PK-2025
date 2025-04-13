@@ -9,6 +9,7 @@ class ConnectedState : public BaseState
 {
 public:
     ConnectedState(Context& context);
+    void handleComposeSms(common::PhoneNumber to, const std::string &text);
 };
 
 }
