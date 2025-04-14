@@ -41,4 +41,9 @@ void Application::handleAttachReject()
     context.state->handleAttachReject();
 }
 
+void Application::handleComposeSms(common::PhoneNumber to, const std::string &text)
+{
+    context.state->handleComposeSms(to, text);
+}
+
 }
