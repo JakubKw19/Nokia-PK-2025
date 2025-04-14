@@ -29,6 +29,7 @@ public:
     void handleAttachAccept() override;
     void handleAttachReject() override;
     void handleComposeSms(common::PhoneNumber to, const std::string &text) override;
+    void handleDisconnect() override;
 private:
     Context context;
     common::PrefixedLogger logger;

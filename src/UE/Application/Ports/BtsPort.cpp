@@ -14,12 +14,14 @@ BtsPort::BtsPort(common::ILogger &logger, common::ITransport &transport, common:
 void BtsPort::start(IBtsEventsHandler &handler)
 {
     transport.registerMessageCallback([this](BinaryMessage msg) {handleMessage(msg);});
+    transport.registerDisconnectedCallback([this]() {handleDisconnect();});
     this->handler = &handler;
 }
 
 void BtsPort::stop()
 {
     transport.registerMessageCallback(nullptr);
+    transport.registerDisconnectedCallback(nullptr);
     handler = nullptr;
 }
 
@@ -81,6 +83,15 @@ void BtsPort::sendSms(common::PhoneNumber to, const std::string &text)
                                 to};
     msg.writeText(text);
     transport.sendMessage(msg.getMessage());
+}
+
+void BtsPort::handleDisconnect()
+{
+    logger.logInfo("handleDisconnect");
+    if (handler)
+        handler->handleDisconnect();
+    else
+        logger.logError("handleDisconnect: handler is nullptr");
 }
 
 }

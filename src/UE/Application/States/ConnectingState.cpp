@@ -29,4 +29,11 @@ void ConnectingState::handleTimeout()
     context.setState<NotConnectedState>();
 }
 
+void ConnectingState::handleDisconnect()
+{
+    context.timer.stopTimer();
+    context.setState<NotConnectedState>();
+    context.logger.logInfo("Disconnected");
+}
+
 }

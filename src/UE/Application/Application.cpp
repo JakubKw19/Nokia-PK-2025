@@ -46,4 +46,9 @@ void Application::handleComposeSms(common::PhoneNumber to, const std::string &te
     context.state->handleComposeSms(to, text);
 }
 
+void Application::handleDisconnect()
+{
+    context.state->handleDisconnect();
+}
+
 }
