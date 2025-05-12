@@ -46,6 +46,17 @@ void Application::handleComposeSms(common::PhoneNumber to, const std::string &te
     context.state->handleComposeSms(to, text);
 }
 
+void Application::handleViewSms(const std::string &index)
+{
+    context.state->handleViewSms(index);
+}
+
+void Application::handleSmsReceived(common::PhoneNumber from, std::string text)
+{
+    logger.logInfo("Received SMS from: " + common::to_string(from) + ", text: " + text);
+    context.state->handleSmsReceived(from, text);
+}
+
 void Application::handleDisconnect()
 {
     context.state->handleDisconnect();

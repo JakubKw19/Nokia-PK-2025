@@ -15,6 +15,7 @@ ConnectingState::ConnectingState(Context &context)
 void ConnectingState::handleAttachAccept()
 {
     context.timer.stopTimer();
+    logger.logInfo("Connected");
     context.setState<ConnectedState>();
 }
 

@@ -11,6 +11,7 @@ class IUserEventsHandler
 public:
     virtual ~IUserEventsHandler() = default;
     virtual void handleComposeSms(common::PhoneNumber to, const std::string &text) = 0;
+    virtual void handleViewSms(const std::string &index) = 0;
 };
 
 class IUserPort

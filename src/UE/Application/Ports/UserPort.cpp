@@ -52,12 +52,56 @@ void UserPort::showConnected()
                 this->message = smsCompose.getSmsText();
                 logger.logInfo("Compose SMS to: " + common::to_string(to) + ", text: " + message);
                 handler->handleComposeSms(this->to, this->message);
+                smsCompose.clearSmsText();
+                this->showConnected();
             });
-            
+            gui.setRejectCallback([this, &smsCompose]() {
+                smsCompose.clearSmsText();
+                this->showConnected();
+            });
         }
-
+        if (index == 1) {
+            IUeGui::IListViewMode& smsList = gui.setListViewMode();
+            smsList.clearSelectionList();
+            smsList.addSelectionListItem("SMS 1", "");
+            smsList.addSelectionListItem("SMS 2", "");
+            smsList.addSelectionListItem("SMS 3", "");
+            gui.setAcceptCallback([this, &smsList]() {
+                auto [ok, index] = smsList.getCurrentItemIndex();
+                if (!ok) return;
+                // logger.logInfo("View SMS: " + std::string(std::to_string(index)));
+                handler->handleViewSms(std::to_string(index));
+                gui.setViewTextMode();
+                
+            });
+            // gui.setAcceptCallback([this, &smsList]() {
+            //     auto [ok, index] = smsList.getCurrentItemIndex();
+            //     if (!ok) return;
+            //     logger.logInfo("View SMS: " + std::to_string(index));
+            //     // handler->handleViewSms(index);
+            // });
+            gui.setRejectCallback([this, &smsList]() {
+                this->showConnected();
+            });
+        }
     });
 }
+
+// void UserPort::showSmsList(const std::vector<SmsMessage>& messages)
+// {
+//     currentViewMode = details::VIEW_MODE_SMS_LIST;
+//     logger.logInfo("Showing SMS List (Count: ", messages.size(), ")");
+//     IUeGui::IListViewMode& menu = gui.setListViewMode();
+//     menu.clearSelectionList();
+//     for (const auto& sms : messages)
+//     {
+//         std::string prefix = sms.isRead ? "  " : "* "; 
+//         std::string label = prefix + "From: " + common::to_string(sms.from);
+//         menu.addSelectionListItem(label, sms.text); 
+//     }
+// }
+
+
 }
 // common::PhoneNumber UserPort::getRecipientPhoneNumber() const
 // {
