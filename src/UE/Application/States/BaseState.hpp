@@ -23,6 +23,12 @@ public:
     void handleComposeSms(common::PhoneNumber to, const std::string &text) override {
         logger.logInfo("baseState: ");
     };
+    void handleViewSms(const std::string &index) override {
+        logger.logInfo("baseState: ");
+    };
+    void handleSmsReceived(common::PhoneNumber from, std::string text) override {
+        logger.logInfo("baseState: received SMS from: ", from);
+    };
     void handleDisconnect() override;
 
 protected:

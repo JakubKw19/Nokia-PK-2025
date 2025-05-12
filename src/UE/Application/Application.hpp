@@ -29,10 +29,13 @@ public:
     void handleAttachAccept() override;
     void handleAttachReject() override;
     void handleComposeSms(common::PhoneNumber to, const std::string &text) override;
+    void handleViewSms(const std::string &index) override;
+    void handleSmsReceived(common::PhoneNumber from, std::string text) override;
     void handleDisconnect() override;
 private:
     Context context;
     common::PrefixedLogger logger;
+    // SmsDb smsDb;
 
 };
 

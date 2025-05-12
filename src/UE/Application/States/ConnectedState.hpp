@@ -10,6 +10,8 @@ class ConnectedState : public BaseState
 public:
     ConnectedState(Context& context);
     void handleComposeSms(common::PhoneNumber to, const std::string &text);
+    void handleViewSms(const std::string &index) override;
+    void handleSmsReceived(common::PhoneNumber from, std::string text) override;
     void handleDisconnect() override;
 };
 
