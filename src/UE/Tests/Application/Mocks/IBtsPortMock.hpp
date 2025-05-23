@@ -2,6 +2,7 @@
 
 #include <gmock/gmock.h>
 #include "Ports/IBtsPort.hpp"
+#include "Smsdb.hpp"
 
 namespace ue
 {
@@ -28,6 +29,7 @@ public:
 
     MOCK_METHOD(void, sendAttachRequest, (common::BtsId), (final));
     MOCK_METHOD(void, sendSms, (common::PhoneNumber, const std::string &), (override));
+    
 };
 
 }

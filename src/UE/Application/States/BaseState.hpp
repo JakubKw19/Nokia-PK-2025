@@ -3,6 +3,7 @@
 #include "IEventsHandler.hpp"
 #include "Logger/PrefixedLogger.hpp"
 #include "Context.hpp"
+#include "Smsdb.hpp"
 
 namespace ue
 {
@@ -21,13 +22,20 @@ public:
     void handleAttachAccept() override;
     void handleAttachReject() override;
     void handleComposeSms(common::PhoneNumber to, const std::string &text) override {
-        logger.logInfo("baseState: ");
+        logger.logInfo("baseState: handleComposeSms");
     };
+    void handleSmsSend() override {
+        logger.logInfo("BaseState: handleSmsSend called (default)");
+    }
     void handleViewSms(const std::string &index) override {
         logger.logInfo("baseState: ");
     };
     void handleSmsReceived(common::PhoneNumber from, std::string text) override {
         logger.logInfo("baseState: received SMS from: ", from);
+    };
+    const std::vector<Sms>& getAllSms() override {
+        logger.logInfo("baseState: ");
+        return context.smsDb.getAllSms();
     };
     void handleDisconnect() override;
 
