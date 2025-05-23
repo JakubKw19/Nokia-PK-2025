@@ -14,6 +14,14 @@ ConnectedState::ConnectedState(Context &context)
 
 void ConnectedState::handleComposeSms(common::PhoneNumber to, const std::string &text) {
     context.setState<ComposeSmsState>(to, text);
+    // context.state->handleComposeSms(to, text);
+    context.setState<ConnectedState>();
+}
+
+const std::vector<Sms>& ConnectedState::getAllSms()
+{
+    const std::vector<Sms>& smsList = context.smsDb.getAllSms();
+    return smsList;
 }
 
 void ConnectedState::handleViewSms(const std::string &index)
@@ -30,8 +38,9 @@ void ConnectedState::handleSmsReceived(common::PhoneNumber from, std::string tex
 {
     logger.logInfo("SMS received from: ", from); // Log removed text for brevity
     int smsIndex = context.smsDb.addSms(Sms{from, text});
-    logger.logDebug("SMS stored at index: ", smsIndex);
+    // logger.logDebug("SMS stored at index: ", smsIndex);
     // context.user.showNewSms(); // Show notification, but stay in main menu
 }
+
 
 }

@@ -18,6 +18,7 @@ public:
     void showNotConnected() override;
     void showConnecting() override;
     void showConnected() override;
+    void showSmsList(const std::vector<Sms>& messages) override;
     // common::PhoneNumber getRecipientPhoneNumber() const
     // {
     //     return this->to;
