@@ -1,6 +1,7 @@
 #include "ConnectedState.hpp"
 #include "ComposeSmsState.hpp"
 #include "NotConnectedState.hpp"
+#include "DialingState.hpp"
 
 namespace ue
 {
@@ -20,5 +21,32 @@ void ConnectedState::handleDisconnect()
 {
     context.setState<NotConnectedState>();
 }
+
+void ConnectedState::handleDial(common::PhoneNumber to)
+{
+    context.setState<DialingState>(to);
+}
+void ConnectedState::handleCallAccepted(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored CallAccepted in ConnectedState from: ", from);
+}
+
+void ConnectedState::handleCallDropped(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored CallDropped in ConnectedState from: ", from);
+}
+
+void ConnectedState::handleUnknownRecipient(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored UnknownRecipient in ConnectedState from: ", from);
+}
+void ConnectedState::handleCallRequest(common::PhoneNumber to)
+{
+    logger.logInfo("Handling call request to: ", to);
+    //userPort.showDialing(to);
+    //btsPort.sendCallRequest(to);
+    context.setState<DialingState>(to);
+}
+
 
 }

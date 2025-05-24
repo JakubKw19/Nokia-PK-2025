@@ -18,6 +18,19 @@ void NotConnectedState::handleSib(common::BtsId btsId)
     context.setState<ConnectingState>();
     context.timer.startTimer(500ms);
 }
+void NotConnectedState::handleCallAccepted(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored CallAccepted from ", from, " in NotConnectedState");
+}
 
+void NotConnectedState::handleCallDropped(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored CallDropped from ", from, " in NotConnectedState");
+}
+
+void NotConnectedState::handleUnknownRecipient(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored UnknownRecipient from ", from, " in NotConnectedState");
+}
 
 }

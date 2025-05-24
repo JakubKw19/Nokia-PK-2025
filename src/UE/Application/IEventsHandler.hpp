@@ -11,6 +11,10 @@ namespace ue
 class IEventsHandler : public IBtsEventsHandler,
                        public IUserEventsHandler,
                        public ITimerEventsHandler
-{};
+{
+public:
+    virtual void handleCallRequest(common::PhoneNumber to) = 0;
+
+};
 
 }

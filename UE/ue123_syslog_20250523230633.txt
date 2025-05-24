@@ -1,0 +1,38 @@
+#1,tid:126651025856448[DEBUG]: [phone:123]GUI: setConnectedStateSlot()
+#2,tid:126651025856448[DEBUG]: [phone:123]GUI: setNewMessageSlot(0)
+#3,tid:126651025856448[DEBUG]: [phone:123][TRANSPORT]Selected configuration localhost:8181
+#4,tid:126651025856448: [phone:123][APP] Started
+#5,tid:126651025856448[DEBUG]: [phone:123][NotConnectedState]entry
+#6,tid:126651025856448: [phone:123][NotConnectedState]Not Connected
+#7,tid:126651025856448[DEBUG]: [phone:123]GUI: setConnectedStateSlot(Not connected)
+#8,tid:126651025856448[DEBUG]: [phone:123][TIMER PORT]Started
+#9,tid:126651025856448[ERROR]: [phone:123][TRANSPORT]Connection refused by peer
+#10,tid:126651025856448[ERROR]: [phone:123][TRANSPORT]Connection refused by peer
+#11,tid:126651025856448[ERROR]: [phone:123][TRANSPORT]Connection refused by peer
+#12,tid:126651025856448[DEBUG]: [phone:123][BTS-PORT]sendAttachRequest: 1380136283
+#13,tid:126651025856448[DEBUG]: [phone:123][ConnectingState]entry
+#14,tid:126651025856448[DEBUG]: [phone:123][ConnectingState]entry
+#15,tid:126651025856448[DEBUG]: [phone:123]GUI: setConnectedStateSlot(Connecting)
+#16,tid:126651025856448[DEBUG]: [phone:123][NotConnectedState]exit
+#17,tid:126651025856448[DEBUG]: [phone:123][TIMER PORT]Start timer: 500ms
+#18,tid:126651025856448[DEBUG]: [phone:123][TIMER PORT]Stop timer
+#19,tid:126651025856448[DEBUG]: [phone:123][TRANSPORT]Send message of size: 9
+#20,tid:126651025856448[DEBUG]: [phone:123][TIMER PORT]Stop timer
+#21,tid:126650679297728[DEBUG]: [phone:123][TIMER PORT]Timer interrupted
+#22,tid:126651025856448[DEBUG]: [phone:123][ConnectedState]entry
+#23,tid:126651025856448: [phone:123][ConnectedState]Connected
+#24,tid:126651025856448[DEBUG]: [phone:123][ConnectingState]exit
+#25,tid:126651025856448: [phone:123][USER-PORT]Compose SMS to: 0, text: 
+#26,tid:126651025856448[DEBUG]: [phone:123][ConnectedState]entry
+#27,tid:126651025856448[DEBUG]: [phone:123][ConnectedState]exit
+#28,tid:126651025856448: [phone:123][USER-PORT]Compose SMS to: 0, text: 
+#29,tid:126651025856448: [phone:123][ConnectedState]Compose SMS to: 0, text: 
+#30,tid:126651025856448: [phone:123][BTS-PORT]Sending SMS to: 000
+#31,tid:126651025856448[DEBUG]: [phone:123][TRANSPORT]Send message of size: 5
+#32,tid:126651025856448[DEBUG]: [phone:123][ConnectedState]Ignored UnknownRecipient in ComposeSmsState
+#33,tid:126651025856448[DEBUG]: [phone:123][TIMER PORT]Stoped
+#34,tid:126651025856448[DEBUG]: [phone:123][TIMER PORT]Stop timer
+#35,tid:126651025856448: [phone:123][APP] Stopped
+#36,tid:126651025856448[DEBUG]: [phone:123][ConnectedState]exit
+#37,tid:126651025856448[DEBUG]: [phone:123][TRANSPORT]Bye
+#38,tid:126651025856448[ERROR]: [phone:123][TRANSPORT]Connection lost! - application not interested!

@@ -18,6 +18,9 @@ public:
     void showNotConnected() override;
     void showConnecting() override;
     void showConnected() override;
+    void showDialing(common::PhoneNumber to) override;
+    void showMessage(const std::string& text) override;
+    void handleCallRequest(common::PhoneNumber to) override;
     // common::PhoneNumber getRecipientPhoneNumber() const
     // {
     //     return this->to;

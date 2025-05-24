@@ -2,23 +2,10 @@
 
 #include <gmock/gmock.h>
 #include "Ports/IBtsPort.hpp"
+#include "IBtsEventsHandlerMock.hpp"
 
 namespace ue
 {
-
-class IBtsEventsHandlerMock : public IBtsEventsHandler
-{
-public:
-    IBtsEventsHandlerMock();
-    ~IBtsEventsHandlerMock() override;
-
-    MOCK_METHOD(void, handleSib, (common::BtsId), (final));
-    MOCK_METHOD(void, handleAttachAccept, (), (final));
-    MOCK_METHOD(void, handleAttachReject, (), (final));
-    // MOCK_METHOD(void, handleComposeSms, (common::PhoneNumber, const std::string &), (final));
-    MOCK_METHOD(void, handleDisconnect, (), (final));
-    
-};
 
 class IBtsPortMock : public IBtsPort
 {
@@ -28,6 +15,8 @@ public:
 
     MOCK_METHOD(void, sendAttachRequest, (common::BtsId), (final));
     MOCK_METHOD(void, sendSms, (common::PhoneNumber, const std::string &), (override));
+    MOCK_METHOD(void, sendCallRequest, (common::PhoneNumber), (override));
+    MOCK_METHOD(void, sendCallDropped, (common::PhoneNumber), (override));
 };
 
 }

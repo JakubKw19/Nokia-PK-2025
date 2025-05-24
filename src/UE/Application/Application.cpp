@@ -51,4 +51,29 @@ void Application::handleDisconnect()
     context.state->handleDisconnect();
 }
 
+void Application::handleCallAccepted(common::PhoneNumber from)
+{
+    context.state->handleCallAccepted(from);
+}
+
+void Application::handleCallDropped(common::PhoneNumber from)
+{
+    context.state->handleCallDropped(from);
+}
+
+void Application::handleUnknownRecipient(common::PhoneNumber from)
+{
+    context.state->handleUnknownRecipient(from);
+}
+void Application::handleCallRequest(common::PhoneNumber to)
+{
+    context.state->handleCallRequest(to);
+}/*
+void Application::handleCallRequest(common::PhoneNumber to)
+{
+    logger.logInfo("Handling call request to ", to);
+    IBtsPort.sendCallRequest(to);
+}*/
+
+
 }

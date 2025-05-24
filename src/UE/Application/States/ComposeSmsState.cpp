@@ -19,5 +19,20 @@ namespace ue
         logger.logInfo("Compose SMS to: " + common::to_string(to) + ", text: " + text);
         context.bts.sendSms(to, message);
     }
+    void ComposeSmsState::handleCallAccepted(common::PhoneNumber from)
+    {
+        logger.logDebug("Ignored CallAccepted in ComposeSmsState");
+    }
+
+    void ComposeSmsState::handleCallDropped(common::PhoneNumber from)
+    {
+        logger.logDebug("Ignored CallDropped in ComposeSmsState");
+    }
+
+    void ComposeSmsState::handleUnknownRecipient(common::PhoneNumber from)
+    {
+        logger.logDebug("Ignored UnknownRecipient in ComposeSmsState");
+    }
+
 
 }

@@ -1,0 +1,34 @@
+#1,tid:123619550242752[DEBUG]: [phone:123]GUI: setConnectedStateSlot()
+#2,tid:123619550242752[DEBUG]: [phone:123]GUI: setNewMessageSlot(0)
+#3,tid:123619550242752[DEBUG]: [phone:123][TRANSPORT]Selected configuration localhost:8181
+#4,tid:123619550242752: [phone:123][APP] Started
+#5,tid:123619550242752[DEBUG]: [phone:123][NotConnectedState]entry
+#6,tid:123619550242752: [phone:123][NotConnectedState]Not Connected
+#7,tid:123619550242752[DEBUG]: [phone:123]GUI: setConnectedStateSlot(Not connected)
+#8,tid:123619550242752[DEBUG]: [phone:123][TIMER PORT]Started
+#9,tid:123619550242752[DEBUG]: [phone:123][BTS-PORT]sendAttachRequest: 199872547
+#10,tid:123619550242752[DEBUG]: [phone:123][ConnectingState]entry
+#11,tid:123619550242752[DEBUG]: [phone:123][ConnectingState]entry
+#12,tid:123619550242752[DEBUG]: [phone:123]GUI: setConnectedStateSlot(Connecting)
+#13,tid:123619550242752[DEBUG]: [phone:123][NotConnectedState]exit
+#14,tid:123619550242752[DEBUG]: [phone:123][TIMER PORT]Start timer: 500ms
+#15,tid:123619550242752[DEBUG]: [phone:123][TIMER PORT]Stop timer
+#16,tid:123619550242752[DEBUG]: [phone:123][TRANSPORT]Send message of size: 9
+#17,tid:123619550242752[DEBUG]: [phone:123][TIMER PORT]Stop timer
+#18,tid:123619120252608[DEBUG]: [phone:123][TIMER PORT]Timer interrupted
+#19,tid:123619550242752[DEBUG]: [phone:123][ConnectedState]entry
+#20,tid:123619550242752: [phone:123][ConnectedState]Connected
+#21,tid:123619550242752[DEBUG]: [phone:123][ConnectingState]exit
+#22,tid:123619550242752: [phone:123][USER-PORT]Request Call to: 123
+#23,tid:123619550242752: [phone:123][ConnectedState]Handling call request to: 123
+#24,tid:123619550242752[DEBUG]: [phone:123][DialingState]entry
+#25,tid:123619550242752: [phone:123][DialingState]Dialing to: 123
+#26,tid:123619550242752: [phone:123][BTS-PORT]Sending CallRequest to: 123
+#27,tid:123619550242752: [phone:123][USER-PORT]Dialing: 123
+#28,tid:123619550242752[DEBUG]: [phone:123][TIMER PORT]Start timer: 60000ms
+#29,tid:123619550242752[DEBUG]: [phone:123][TIMER PORT]Stop timer
+#30,tid:123619550242752[DEBUG]: [phone:123][ConnectedState]exit
+#31,tid:123619550242752[DEBUG]: [phone:123][TRANSPORT]Send message of size: 6
+#32,tid:123619550242752[ERROR]: [phone:123][BTS-PORT]unknow message: CallRequest, from: 123
+#33,tid:123619550242752: [phone:123][USER-PORT]Request Call to: 123
+#34,tid:123619550242752: [phone:123][USER-PORT]Request Call to: 123

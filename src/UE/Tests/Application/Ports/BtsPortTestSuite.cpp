@@ -8,6 +8,8 @@
 #include "Mocks/ITransportMock.hpp"
 #include "Messages/OutgoingMessage.hpp"
 #include "Messages/IncomingMessage.hpp"
+#include "Mocks/IBtsEventsHandlerMock.hpp"
+
 
 namespace ue
 {

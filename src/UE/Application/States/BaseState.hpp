@@ -24,6 +24,8 @@ public:
         logger.logInfo("baseState: ");
     };
     void handleDisconnect() override;
+    void handleCallRequest(common::PhoneNumber) {}
+
 
 protected:
     Context& context;

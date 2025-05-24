@@ -51,6 +51,21 @@ void BtsPort::handleMessage(BinaryMessage msg)
                 handler->handleAttachReject();
             break;
         }
+        case common::MessageId::CallAccepted:
+        {
+            handler->handleCallAccepted(from);
+            break;
+        }
+        case common::MessageId::CallDropped:
+        {
+            handler->handleCallDropped(from);
+            break;
+        }
+        case common::MessageId::UnknownRecipient:
+        {
+            handler->handleUnknownRecipient(from);
+            break;
+        }
         default:
             logger.logError("unknow message: ", msgId, ", from: ", from);
 
@@ -92,6 +107,21 @@ void BtsPort::handleDisconnect()
         handler->handleDisconnect();
     else
         logger.logError("handleDisconnect: handler is nullptr");
+}
+
+void BtsPort::sendCallRequest(common::PhoneNumber to)
+{
+    logger.logInfo("Sending CallRequest to: ", to);
+    common::OutgoingMessage msg{common::MessageId::CallRequest, phoneNumber, to};
+    msg.writeNumber<std::uint8_t>(0); // Encryption mode: 0 (no encryption)
+    transport.sendMessage(msg.getMessage());
+}
+
+void BtsPort::sendCallDropped(common::PhoneNumber to)
+{
+    logger.logInfo("Sending CallDropped to: ", to);
+    common::OutgoingMessage msg{common::MessageId::CallDropped, phoneNumber, to};
+    transport.sendMessage(msg.getMessage());
 }
 
 }
