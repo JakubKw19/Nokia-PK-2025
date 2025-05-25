@@ -22,7 +22,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y build-essential cmake
 
       - name: Install Qt
-        uses: sudo apt-get install -y qtbase5-dev
+        run: sudo apt-get install -y qtbase5-dev
 
       - name: Configure CMake
         run: cmake .
@@ -33,7 +33,7 @@ jobs:
       - name: Run Unit Tests
         run: |
           make BtsApplicationUT && ./BTS/Tests/Application/BtsApplicationUT
-          make COMMON_UT && ./COMMON/Tests/CommonUT
+          make COMMON_UT && ./COMMON/Tests/Common_UT
           make UeApplicationUT && ./UE/Tests/UeApplicationUT
 
       - name: Run Static Analysis (cppcheck)

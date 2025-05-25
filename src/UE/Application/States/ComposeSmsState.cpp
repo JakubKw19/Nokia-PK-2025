@@ -12,16 +12,20 @@ namespace ue
       to(to),
       message(text)
 {
-    this->to = to;
-    this->message = text;
-    // logger.logInfo("Compose SMS to: " + common::to_string(to) + ", text: " + text);
+    this->handleComposeSms(to, text);
 }
 
     void ComposeSmsState::handleComposeSms(common::PhoneNumber to, const std::string &text)
     {
-        logger.logInfo("Compose SMS to: " + common::to_string(to) + ", text: " + text);
+        logger.logInfo("ComposeSmsState: handleComposeSms called");
+        context.bts.sendSms(to, message);
+
+    }
+
+    void ComposeSmsState::handleSmsSend()
+    {
+        logger.logInfo("ComposeSmsState: Sending SMS to: " + common::to_string(to));
         context.bts.sendSms(to, message);
         context.setState<ConnectedState>();
     }
-
 }

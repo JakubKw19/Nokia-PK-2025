@@ -1,5 +1,6 @@
 #include "Application.hpp"
 #include "States/NotConnectedState.hpp"
+#include "Smsdb.hpp"
 
 namespace ue
 {
@@ -36,6 +37,11 @@ void Application::handleAttachAccept()
     context.state->handleAttachAccept();
 }
 
+void Application::handleSmsSend()
+{
+    context.state->handleSmsSend();
+}
+
 void Application::handleAttachReject()
 {
     context.state->handleAttachReject();
@@ -44,6 +50,11 @@ void Application::handleAttachReject()
 void Application::handleComposeSms(common::PhoneNumber to, const std::string &text)
 {
     context.state->handleComposeSms(to, text);
+}
+
+const std::vector<Sms>& Application::getAllSms()
+{
+    return context.state->getAllSms();
 }
 
 void Application::handleViewSms(const std::string &index)
@@ -60,6 +71,11 @@ void Application::handleSmsReceived(common::PhoneNumber from, std::string text)
 void Application::handleDisconnect()
 {
     context.state->handleDisconnect();
+}
+
+void Application::markSmsAsRead(size_t index)
+{
+    context.state->markSmsAsRead(index);
 }
 
 }

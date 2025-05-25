@@ -9,7 +9,6 @@ namespace ue
     : BaseState(context, "ViewSmsState"), smsIndex(index)
 {
     this->smsIndex = index;
-    // logger.logInfo("Compose SMS to: " + common::to_string(to) + ", text: " + text);
 }
 
     void ViewSmsState::handleViewSms(const std::string &index)
