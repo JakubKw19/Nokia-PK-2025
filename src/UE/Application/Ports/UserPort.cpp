@@ -127,6 +127,10 @@ void UserPort::showDialing(common::PhoneNumber to)
 {
     IUeGui::IDialMode& dialMode = gui.setDialMode();
     logger.logInfo("Dialing: ", to);
+    gui.setRejectCallback([this]() {
+        if (handler) handler->handleUserHangUp();
+    });
+
 }
 
 void UserPort::showMessage(const std::string& text)

@@ -53,7 +53,10 @@ void DialingState::handleUserReject()
 }
 
 void DialingState::handleUserHangUp() {
-    logger.logError("Sprawdzamy");
+    logger.logInfo("User cancelled call before it was answered");
+    context.timer.stopTimer();
+    context.bts.sendCallDropped(callee);
+    context.setState<ConnectedState>();
 }
 
 }
