@@ -113,6 +113,11 @@ void Application::handleUserHangUp()
     context.state->handleUserHangUp();
 }
 
+void Application::handleDial(common::PhoneNumber to)
+{
+    context.state->handleDial(to);
+}
+
 /*
 void Application::handleCallRequest(common::PhoneNumber to)
 {

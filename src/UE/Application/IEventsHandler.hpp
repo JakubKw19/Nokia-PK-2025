@@ -13,7 +13,7 @@ class IEventsHandler : public IBtsEventsHandler,
                        public ITimerEventsHandler
 {
 public:
-    virtual void handleCallRequest(common::PhoneNumber to) = 0;
+    virtual void handleDial(common::PhoneNumber to) = 0;
     
     using IUserEventsHandler::handleUserAccept;
     using IUserEventsHandler::handleUserReject;

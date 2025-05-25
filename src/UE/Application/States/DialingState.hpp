@@ -16,6 +16,8 @@ public:
     void handleUnknownRecipient(common::PhoneNumber from) override;
     void handleTimeout() override;
     void handleUserReject();
+    void handleDial(common::PhoneNumber) override {};
+    void handleUserHangUp() override;
 
 private:
     common::PhoneNumber callee;

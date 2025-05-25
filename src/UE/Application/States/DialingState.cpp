@@ -1,5 +1,6 @@
 #include "DialingState.hpp"
 #include "ConnectedState.hpp"
+#include "TalkingState.hpp"
 
 namespace ue
 {
@@ -17,7 +18,7 @@ void DialingState::handleCallAccepted(common::PhoneNumber from)
 {
     logger.logInfo("Call accepted by: ", from);
     context.timer.stopTimer();
-    //context.setState<TalkingState>(from);
+    context.setState<TalkingState>(from);
 }
 
 void DialingState::handleCallDropped(common::PhoneNumber from)
@@ -49,6 +50,10 @@ void DialingState::handleUserReject()
     context.timer.stopTimer();
     context.bts.sendCallDropped(callee);
     context.setState<ConnectedState>();
+}
+
+void DialingState::handleUserHangUp() {
+    logger.logError("Sprawdzamy");
 }
 
 }

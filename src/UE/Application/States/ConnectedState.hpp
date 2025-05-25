@@ -15,7 +15,7 @@ public:
     const std::vector<Sms>& getAllSms() override;
     void handleDisconnect() override;
     void markSmsAsRead(size_t index) override;
-    void handleDial(common::PhoneNumber to);
+    void handleDial(common::PhoneNumber to) override;
     void handleCallAccepted(common::PhoneNumber from) override;
     void handleCallDropped(common::PhoneNumber from) override;
     void handleUnknownRecipient(common::PhoneNumber from) override;

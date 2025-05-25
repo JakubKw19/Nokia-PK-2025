@@ -71,8 +71,8 @@ void ConnectedState::handleUnknownRecipient(common::PhoneNumber from)
 void ConnectedState::handleCallRequest(common::PhoneNumber from)
 {
     logger.logInfo("Handling call request from: ", from);
-    //userPort.showDialing(from);
-    //btsPort.sendCallRequest(from);
+    context.user.showDialing(from);
+    context.bts.sendCallRequest(from);
     context.setState<RingingState>(from);
 }
 

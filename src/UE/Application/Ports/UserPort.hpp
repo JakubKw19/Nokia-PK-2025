@@ -21,9 +21,9 @@ public:
     void showSmsList(const std::vector<Sms>& messages) override;
     void showDialing(common::PhoneNumber to) override;
     void showMessage(const std::string& text) override;
-    void handleCallRequest(common::PhoneNumber to) override;
     void showTalking(common::PhoneNumber interlocutor) override;
     void showCallRequest(common::PhoneNumber from) override;
+    void handleDial(common::PhoneNumber to);
     // common::PhoneNumber getRecipientPhoneNumber() const
     // {
     //     return this->to;

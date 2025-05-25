@@ -16,7 +16,7 @@ public:
     virtual const std::vector<Sms>& getAllSms() = 0;
     virtual void handleSmsSend() = 0;
     virtual void markSmsAsRead(size_t index) = 0;
-    virtual void handleCallRequest(common::PhoneNumber to) = 0;
+    virtual void handleDial(common::PhoneNumber to) = 0;
     virtual void handleUserAccept() = 0;
     virtual void handleUserReject() = 0;
     virtual void handleUserHangUp() = 0;
@@ -32,7 +32,6 @@ public:
     virtual void showSmsList(const std::vector<Sms>& messages) = 0;
     virtual void showDialing(common::PhoneNumber to) = 0;
     virtual void showMessage(const std::string& text) = 0;
-    virtual void handleCallRequest(common::PhoneNumber to) = 0;
     virtual void showCallRequest(common::PhoneNumber from) = 0;
     virtual void showTalking(common::PhoneNumber interlocutor) = 0;
     // virtual common::PhoneNumber getRecipientPhoneNumber() const = 0;
