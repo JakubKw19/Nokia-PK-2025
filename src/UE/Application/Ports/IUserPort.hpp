@@ -15,6 +15,7 @@ public:
     virtual void handleViewSms(const std::string &index) = 0;
     virtual const std::vector<Sms>& getAllSms() = 0;
     virtual void handleSmsSend() = 0;
+    virtual void markSmsAsRead(size_t index) = 0;
 };
 
 class IUserPort

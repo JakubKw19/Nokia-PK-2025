@@ -33,6 +33,10 @@ public:
     void handleSmsReceived(common::PhoneNumber from, std::string text) override {
         logger.logInfo("baseState: received SMS from: ", from);
     };
+    void markSmsAsRead(size_t index) override {
+        logger.logInfo("baseState: markSmsAsRead called for index: ", index);
+        context.smsDb.markAsRead(index);
+    };
     const std::vector<Sms>& getAllSms() override {
         logger.logInfo("baseState: ");
         return context.smsDb.getAllSms();

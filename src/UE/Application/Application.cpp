@@ -73,4 +73,9 @@ void Application::handleDisconnect()
     context.state->handleDisconnect();
 }
 
+void Application::markSmsAsRead(size_t index)
+{
+    context.state->markSmsAsRead(index);
+}
+
 }

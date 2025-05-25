@@ -42,5 +42,10 @@ void ConnectedState::handleSmsReceived(common::PhoneNumber from, std::string tex
     // context.user.showNewSms(); // Show notification, but stay in main menu
 }
 
+void ConnectedState::markSmsAsRead(size_t index)
+{
+    context.smsDb.markAsRead(index);
+}
+
 
 }

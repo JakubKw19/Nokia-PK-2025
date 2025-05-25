@@ -15,6 +15,7 @@ public:
     MOCK_METHOD(void, handleViewSms, (const std::string &index), (override));
     MOCK_METHOD(const std::vector<Sms>&, getAllSms, (), (override));
     MOCK_METHOD(void, handleSmsSend, (), (override));
+    MOCK_METHOD(void, markSmsAsRead, (size_t index), (override));
 };
 
 class IUserPortMock : public IUserPort

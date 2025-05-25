@@ -34,6 +34,7 @@ public:
     void handleSmsReceived(common::PhoneNumber from, std::string text) override;
     void handleDisconnect() override;
     void handleSmsSend() override;
+    void markSmsAsRead(size_t index) override;
 private:
     Context context;
     common::PrefixedLogger logger;
