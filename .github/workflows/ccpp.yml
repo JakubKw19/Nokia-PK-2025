@@ -33,7 +33,7 @@ jobs:
       - name: Run Unit Tests
         run: |
           make BtsApplicationUT && ./BTS/Tests/Application/BtsApplicationUT
-          make COMMON_UT && ./COMMON/Tests/CommonUT
+          make COMMON_UT && ./COMMON/Tests/Common_UT
           make UeApplicationUT && ./UE/Tests/UeApplicationUT
 
       - name: Run Static Analysis (cppcheck)
