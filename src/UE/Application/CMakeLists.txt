@@ -5,5 +5,9 @@ aux_source_directory(. SRC_LIST)
 aux_source_directory(Ports SRC_LIST)
 aux_source_directory(States SRC_LIST)
 
-add_library(${PROJECT_NAME} ${SRC_LIST})
+add_library(${PROJECT_NAME} ${SRC_LIST}
+        States/RingingState.cpp
+        States/RingingState.hpp
+        States/TalkingState.cpp
+        States/TalkingState.hpp)
 target_link_libraries(${PROJECT_NAME} Common)

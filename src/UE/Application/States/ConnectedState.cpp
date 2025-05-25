@@ -2,6 +2,7 @@
 #include "ComposeSmsState.hpp"
 #include "NotConnectedState.hpp"
 #include "DialingState.hpp"
+#include "RingingState.hpp"
 
 namespace ue
 {
@@ -40,12 +41,12 @@ void ConnectedState::handleUnknownRecipient(common::PhoneNumber from)
 {
     logger.logDebug("Ignored UnknownRecipient in ConnectedState from: ", from);
 }
-void ConnectedState::handleCallRequest(common::PhoneNumber to)
+void ConnectedState::handleCallRequest(common::PhoneNumber from)
 {
-    logger.logInfo("Handling call request to: ", to);
-    //userPort.showDialing(to);
-    //btsPort.sendCallRequest(to);
-    context.setState<DialingState>(to);
+    logger.logInfo("Handling call request from: ", from);
+    //userPort.showDialing(from);
+    //btsPort.sendCallRequest(from);
+    context.setState<RingingState>(from);
 }
 
 

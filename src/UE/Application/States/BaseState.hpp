@@ -30,6 +30,30 @@ public:
 protected:
     Context& context;
     common::PrefixedLogger logger;
+
+    virtual void handleUserAccept() {
+        logger.logError("Unexpected: handleUserAccept");
+    }
+
+    virtual void handleUserReject() {
+        logger.logError("Unexpected: handleUserReject");
+    }
+
+    virtual void handleUserHangUp() {
+        logger.logError("Unexpected: handleUserHangUp");
+    }
+
+    virtual void handleCallAccepted(common::PhoneNumber from) {
+        logger.logError("Unexpected: handleCallAccepted from: ", from);
+    }
+
+    virtual void handleCallDropped(common::PhoneNumber from) {
+        logger.logError("Unexpected: handleCallDropped from: ", from);
+    }
+
+    virtual void handleUnknownRecipient(common::PhoneNumber from) {
+        logger.logError("Unexpected: handleUnknownRecipient from: ", from);
+    }
 };
 
 }

@@ -12,6 +12,9 @@ public:
     virtual ~IUserEventsHandler() = default;
     virtual void handleComposeSms(common::PhoneNumber to, const std::string &text) = 0;
     virtual void handleCallRequest(common::PhoneNumber to) = 0;
+    virtual void handleUserAccept() = 0;
+    virtual void handleUserReject() = 0;
+    virtual void handleUserHangUp() = 0;
 };
 
 class IUserPort
@@ -25,7 +28,9 @@ public:
     // virtual std::string getSmsText() const = 0;
     virtual void showDialing(common::PhoneNumber to) = 0;
     virtual void showMessage(const std::string& text) = 0;
-    virtual void handleCallRequest(common::PhoneNumber to) = 0;
+    virtual void showCallRequest(common::PhoneNumber from) = 0;
+    virtual void showTalking(common::PhoneNumber interlocutor) = 0;
+    //virtual void handleCallRequest(common::PhoneNumber to) = 0;
 };
 
 }

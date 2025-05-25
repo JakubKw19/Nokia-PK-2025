@@ -68,7 +68,24 @@ void Application::handleUnknownRecipient(common::PhoneNumber from)
 void Application::handleCallRequest(common::PhoneNumber to)
 {
     context.state->handleCallRequest(to);
-}/*
+}
+
+void Application::handleUserAccept()
+{
+    context.state->handleUserAccept();
+}
+
+void Application::handleUserReject()
+{
+    context.state->handleUserReject();
+}
+
+void Application::handleUserHangUp()
+{
+    context.state->handleUserHangUp();
+}
+
+    /*
 void Application::handleCallRequest(common::PhoneNumber to)
 {
     logger.logInfo("Handling call request to ", to);

@@ -56,6 +56,11 @@ void BtsPort::handleMessage(BinaryMessage msg)
             handler->handleCallAccepted(from);
             break;
         }
+        case common::MessageId::CallRequest:
+        {
+            handler->handleCallRequest(from);
+            break;
+        }
         case common::MessageId::CallDropped:
         {
             handler->handleCallDropped(from);
@@ -113,7 +118,14 @@ void BtsPort::sendCallRequest(common::PhoneNumber to)
 {
     logger.logInfo("Sending CallRequest to: ", to);
     common::OutgoingMessage msg{common::MessageId::CallRequest, phoneNumber, to};
-    msg.writeNumber<std::uint8_t>(0); // Encryption mode: 0 (no encryption)
+    msg.writeNumber<std::uint8_t>(0);
+    transport.sendMessage(msg.getMessage());
+}
+
+void BtsPort::sendCallAccepted(common::PhoneNumber to)
+{
+    logger.logInfo("Sending CallAccepted to: ", to);
+    common::OutgoingMessage msg{common::MessageId::CallAccepted, phoneNumber, to};
     transport.sendMessage(msg.getMessage());
 }
 

@@ -51,11 +51,6 @@ void UserPort::showMessage(const std::string& text)
     view.addSelectionListItem("Message", text);
 }
 
-void UserPort::handleCallRequest(common::PhoneNumber to) {
-
-    logger.logInfo("Call Request: ", to);
-}
-
 void UserPort::showConnected()
 {
     IUeGui::IListViewMode& menu = gui.setListViewMode();
@@ -85,6 +80,41 @@ void UserPort::showConnected()
 
     });
 }
+
+void UserPort::showCallRequest(common::PhoneNumber from)
+{
+    logger.logInfo("Incoming call from: ", from);
+    IUeGui::IListViewMode& view = gui.setListViewMode();
+    view.clearSelectionList();
+    view.addSelectionListItem("Incoming call from", common::to_string(from));
+    view.addSelectionListItem("Accept", "");
+    view.addSelectionListItem("Reject", "");
+
+    gui.setAcceptCallback([this, &view]() {
+        auto [ok, index] = view.getCurrentItemIndex();
+        if (!ok) return;
+        if (index == 1) {
+            handler->handleUserAccept();
+        } else if (index == 2) {
+            handler->handleUserReject();
+        }
+    });
+}
+
+void UserPort::showTalking(common::PhoneNumber interlocutor)
+{
+    logger.logInfo("Talking with: ", interlocutor);
+    IUeGui::IListViewMode& view = gui.setListViewMode();
+    view.clearSelectionList();
+    view.addSelectionListItem("Call in progress", common::to_string(interlocutor));
+    view.addSelectionListItem("End call", "");
+
+
+   gui.setAcceptCallback([this]() {
+        handler->handleUserHangUp();
+   });
+}
+
 }
 // common::PhoneNumber UserPort::getRecipientPhoneNumber() const
 // {

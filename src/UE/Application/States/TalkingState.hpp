@@ -1,0 +1,30 @@
+#pragma once
+
+#include "BaseState.hpp"
+#include "Messages/PhoneNumber.hpp"
+
+namespace ue
+{
+
+    class TalkingState : public BaseState
+    {
+    public:
+        TalkingState(Context& context, common::PhoneNumber interlocutor);
+
+        // Obsługa decyzji użytkownika
+        void handleUserHangUp();
+
+        // Obsługa wiadomości od BTS
+        void handleCallAccepted(common::PhoneNumber from) override;
+        void handleCallDropped(common::PhoneNumber from) override;
+        void handleUnknownRecipient(common::PhoneNumber from) override;
+        void handleCallRequest(common::PhoneNumber from) override;
+
+        // Obsługa timeoutu
+        void handleTimeout() override;
+
+    private:
+        common::PhoneNumber interlocutor;
+    };
+
+}
