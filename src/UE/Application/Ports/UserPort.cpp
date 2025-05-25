@@ -4,6 +4,9 @@
 #include "UeGui/ITextMode.hpp"
 #include "Context.hpp"
 #include "Smsdb.hpp"
+#include "UeGui/IDialMode.hpp"
+
+
 using std::string;
 
 
@@ -43,6 +46,7 @@ void UserPort::showConnected()
     menu.clearSelectionList();
     menu.addSelectionListItem("Compose SMS", "");
     menu.addSelectionListItem("View SMS", "");
+    menu.addSelectionListItem("Request Call", "");
     gui.setAcceptCallback([this, &menu]() {
         auto [ok, index] = menu.getCurrentItemIndex();
         if (!ok) return;
@@ -94,6 +98,13 @@ void UserPort::showConnected()
             gui.setRejectCallback([this, &smsList]() {
                 this->showConnected();
             });
+        } else if (index == 2) {
+            IUeGui::IDialMode& dialMode = gui.setDialMode();
+            gui.setAcceptCallback([this, &dialMode]() {
+                this->to = dialMode.getPhoneNumber();
+                logger.logInfo("Request Call to: " + common::to_string(to));
+                handler->handleCallRequest(this->to);
+            });
         }
     });
 }
@@ -110,6 +121,58 @@ void UserPort::showSmsList(const std::vector<ue::Sms>& messages)
         std::string text = sms.text;
         menu.addSelectionListItem(label, sms.text); 
     }
+}
+
+void UserPort::showDialing(common::PhoneNumber to)
+{
+    IUeGui::IDialMode& dialMode = gui.setDialMode();
+    logger.logInfo("Dialing: ", to);
+}
+
+void UserPort::showMessage(const std::string& text)
+{
+    logger.logInfo("Message to user: ", text);
+    IUeGui::IListViewMode& view = gui.setListViewMode();
+    view.clearSelectionList();
+    view.addSelectionListItem("Message", text);
+}
+
+void UserPort::showCallRequest(common::PhoneNumber from)
+{
+    logger.logInfo("Incoming call from: ", from);
+    IUeGui::IListViewMode& view = gui.setListViewMode();
+    view.clearSelectionList();
+    view.addSelectionListItem("Incoming call from", common::to_string(from));
+    view.addSelectionListItem("Accept", "");
+    view.addSelectionListItem("Reject", "");
+
+    gui.setAcceptCallback([this, &view]() {
+        auto [ok, index] = view.getCurrentItemIndex();
+        if (!ok) return;
+        if (index == 1) {
+            handler->handleUserAccept();
+        } else if (index == 2) {
+            handler->handleUserReject();
+        }
+    });
+}
+
+void UserPort::showTalking(common::PhoneNumber interlocutor)
+{
+    logger.logInfo("Talking with: ", interlocutor);
+    IUeGui::IListViewMode& view = gui.setListViewMode();
+    view.clearSelectionList();
+    view.addSelectionListItem("Call in progress", common::to_string(interlocutor));
+    view.addSelectionListItem("End call", "");
+
+
+   gui.setAcceptCallback([this]() {
+        handler->handleUserHangUp();
+   });
+}
+
+void UserPort::handleCallRequest(common::PhoneNumber to) {
+    logger.logInfo("UserPort: handleCallRequest to ", to);
 }
 
 

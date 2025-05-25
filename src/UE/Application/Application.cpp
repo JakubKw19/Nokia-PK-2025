@@ -78,4 +78,47 @@ void Application::markSmsAsRead(size_t index)
     context.state->markSmsAsRead(index);
 }
 
+void Application::handleCallAccepted(common::PhoneNumber from)
+{
+    context.state->handleCallAccepted(from);
+}
+
+void Application::handleCallDropped(common::PhoneNumber from)
+{
+    context.state->handleCallDropped(from);
+}
+
+void Application::handleUnknownRecipient(common::PhoneNumber from)
+{
+    context.state->handleUnknownRecipient(from);
+}
+
+void Application::handleCallRequest(common::PhoneNumber to)
+{
+    context.state->handleCallRequest(to);
+}
+
+void Application::handleUserAccept()
+{
+    context.state->handleUserAccept();
+}
+
+void Application::handleUserReject()
+{
+    context.state->handleUserReject();
+}
+
+void Application::handleUserHangUp()
+{
+    context.state->handleUserHangUp();
+}
+
+/*
+void Application::handleCallRequest(common::PhoneNumber to)
+{
+    logger.logInfo("Handling call request to ", to);
+    IBtsPort.sendCallRequest(to);
+}*/
+
+
 }

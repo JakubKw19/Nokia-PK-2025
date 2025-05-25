@@ -28,4 +28,19 @@ namespace ue
         context.bts.sendSms(to, message);
         context.setState<ConnectedState>();
     }
+
+    void ComposeSmsState::handleCallAccepted(common::PhoneNumber from)
+    {
+        logger.logDebug("Ignored CallAccepted in ComposeSmsState");
+    }
+
+    void ComposeSmsState::handleCallDropped(common::PhoneNumber from)
+    {
+        logger.logDebug("Ignored CallDropped in ComposeSmsState");
+    }
+
+    void ComposeSmsState::handleUnknownRecipient(common::PhoneNumber from)
+    {
+        logger.logDebug("Ignored UnknownRecipient in ComposeSmsState");
+    }
 }

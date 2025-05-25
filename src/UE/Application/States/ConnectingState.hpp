@@ -13,6 +13,9 @@ public:
     void handleAttachReject() override;
     void handleTimeout() override;
     void handleDisconnect() override;
+    void handleCallAccepted(common::PhoneNumber from) override;
+    void handleCallDropped(common::PhoneNumber from) override;
+    void handleUnknownRecipient(common::PhoneNumber from) override;
 };
 
 }

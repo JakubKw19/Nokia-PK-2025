@@ -42,10 +42,35 @@ public:
         return context.smsDb.getAllSms();
     };
     void handleDisconnect() override;
+    void handleCallRequest(common::PhoneNumber) {};
+    void handleCallAccepted(common::PhoneNumber from) override {
+        logger.logInfo("baseState: handleCallAccepted called (default)");
+    };
+    void handleCallDropped(common::PhoneNumber from) override {
+        logger.logInfo("baseState: handleCallDropped called (default)");
+    };
+    void handleUnknownRecipient(common::PhoneNumber from) override {
+        logger.logInfo("baseState: handleUnknownRecipient called (default)");
+    };
+
+    void handleUserAccept() override {
+        logger.logError("Unexpected: handleUserAccept");
+    }
+
+    void handleUserReject() override {
+        logger.logError("Unexpected: handleUserReject");
+    }
+
+    void handleUserHangUp() override {
+        logger.logError("Unexpected: handleUserHangUp");
+    }
+
 
 protected:
     Context& context;
     common::PrefixedLogger logger;
+
+    
 };
 
 }

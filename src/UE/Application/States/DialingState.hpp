@@ -6,14 +6,19 @@
 namespace ue
 {
 
-class NotConnectedState : public BaseState
+class DialingState : public BaseState
 {
 public:
-    NotConnectedState(Context& context);
-    void handleSib(common::BtsId btsId);
+    DialingState(Context& context, common::PhoneNumber callee);
+
     void handleCallAccepted(common::PhoneNumber from) override;
     void handleCallDropped(common::PhoneNumber from) override;
     void handleUnknownRecipient(common::PhoneNumber from) override;
+    void handleTimeout() override;
+    void handleUserReject();
+
+private:
+    common::PhoneNumber callee;
 };
 
 }

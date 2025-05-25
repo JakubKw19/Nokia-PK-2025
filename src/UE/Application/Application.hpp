@@ -35,6 +35,14 @@ public:
     void handleDisconnect() override;
     void handleSmsSend() override;
     void markSmsAsRead(size_t index) override;
+    void handleCallAccepted(common::PhoneNumber from) override;
+    void handleCallDropped(common::PhoneNumber from) override;
+    void handleUnknownRecipient(common::PhoneNumber from) override;
+    void handleCallRequest(common::PhoneNumber to) override;
+    void handleUserAccept() override;
+    void handleUserReject() override;
+    void handleUserHangUp() override;
+
 private:
     Context context;
     common::PrefixedLogger logger;
