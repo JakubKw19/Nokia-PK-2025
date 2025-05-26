@@ -105,6 +105,9 @@ void UserPort::showConnected()
                 logger.logInfo("Request Call to: " + common::to_string(to));
                 handler->handleDial(this->to);
             });
+            gui.setRejectCallback([this, &dialMode]() {
+                this->showConnected();
+            });
         }
     });
 }
@@ -181,7 +184,15 @@ void UserPort::showTalking(common::PhoneNumber interlocutor)
    //  view.addSelectionListItem("End call", "");
    //
    //
-   IUeGui::IDialMode& dialMode = gui.setDialMode();
+   // IUeGui::IDialMode& dialMode = gui.setDialMode();
+
+   IUeGui::ICallMode& callMode = gui.setCallMode();
+
+    gui.setAcceptCallback([this]() {
+    handler->handleUserAccept();
+    });
+
+
    gui.setRejectCallback([this]() {
    handler->handleUserHangUp();
    });
