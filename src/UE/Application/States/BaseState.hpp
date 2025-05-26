@@ -64,6 +64,9 @@ public:
     void handleUserHangUp() override {
         logger.logError("Unexpected: handleUserHangUp");
     }
+    void handleMessageSend(common::PhoneNumber to, const std::string &text) override {
+        logger.logInfo("baseState: handleMessageSend called (default)");
+    }
 
 
 protected:

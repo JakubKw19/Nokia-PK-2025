@@ -5,6 +5,7 @@
 #include "Context.hpp"
 #include "Smsdb.hpp"
 #include "UeGui/IDialMode.hpp"
+#include "UeGui/ICallMode.hpp"
 
 
 using std::string;
@@ -55,12 +56,12 @@ void UserPort::showConnected()
             gui.setAcceptCallback([this, &smsCompose]() {
                 this->to = smsCompose.getPhoneNumber();
                 this->message = smsCompose.getSmsText();
-                
+
                 // IUeGui::IListViewMode& menu = gui.setListViewMode();
                 // std::string label = "To: " + common::to_string(this->to);
                 // std::string text = this->message;
                 // menu.addSelectionListItem(label, text);
-                
+
                 handler->handleComposeSms(this->to, this->message);
                 smsCompose.clearSmsText();
                 this->showConnected();
@@ -105,7 +106,7 @@ void UserPort::showConnected()
                 logger.logInfo("Request Call to: " + common::to_string(to));
                 handler->handleDial(this->to);
             });
-            gui.setRejectCallback([this, &dialMode]() {
+            gui.setRejectCallback([this]() {
                 this->showConnected();
             });
         }
@@ -119,10 +120,10 @@ void UserPort::showSmsList(const std::vector<ue::Sms>& messages)
     menu.clearSelectionList();
     for (const auto& sms : messages)
     {
-        std::string prefix = sms.isRead ? "  " : "* "; 
+        std::string prefix = sms.isRead ? "  " : "* ";
         std::string label = prefix + "From: " + common::to_string(sms.from);
         std::string text = sms.text;
-        menu.addSelectionListItem(label, sms.text); 
+        menu.addSelectionListItem(label, sms.text);
     }
 }
 
@@ -131,7 +132,7 @@ void UserPort::showDialing(common::PhoneNumber to)
     IUeGui::IDialMode& dialMode = gui.setDialMode();
     logger.logInfo("Dialing: ", to);
     gui.setRejectCallback([this]() {
-        if (handler) handler->handleUserHangUp();
+        handler->handleUserHangUp();
     });
 
 }
@@ -184,17 +185,13 @@ void UserPort::showTalking(common::PhoneNumber interlocutor)
    //  view.addSelectionListItem("End call", "");
    //
    //
-   // IUeGui::IDialMode& dialMode = gui.setDialMode();
-
    IUeGui::ICallMode& callMode = gui.setCallMode();
-
-    gui.setAcceptCallback([this]() {
-    handler->handleUserAccept();
-    });
-
-
+   gui.setAcceptCallback([this, &callMode, interlocutor]() {
+    common::PhoneNumber number = interlocutor;
+    handler->handleMessageSend(number, callMode.getOutgoingText());
+   });
    gui.setRejectCallback([this]() {
-   handler->handleUserHangUp();
+    handler->handleUserHangUp();
    });
 }
 

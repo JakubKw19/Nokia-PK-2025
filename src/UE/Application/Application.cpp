@@ -118,6 +118,12 @@ void Application::handleDial(common::PhoneNumber to)
     context.state->handleDial(to);
 }
 
+void Application::handleMessageSend(common::PhoneNumber to, const std::string &text)
+{
+    context.state->handleMessageSend(to, text);
+}
+
+
 /*
 void Application::handleCallRequest(common::PhoneNumber to)
 {

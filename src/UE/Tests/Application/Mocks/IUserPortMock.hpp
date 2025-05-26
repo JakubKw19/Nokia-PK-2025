@@ -20,7 +20,7 @@ public:
     MOCK_METHOD(void, handleUserAccept, (), (override));
     MOCK_METHOD(void, handleUserReject, (), (override));
     MOCK_METHOD(void, handleUserHangUp, (), (override));
-    
+    MOCK_METHOD(void, handleMessageSend, (common::PhoneNumber to, const std::string &text), (override));
 };
 
 class IUserPortMock : public IUserPort

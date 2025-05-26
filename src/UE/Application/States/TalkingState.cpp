@@ -39,6 +39,14 @@ namespace ue
         }
     }
 
+    void TalkingState::handleMessageSend(common::PhoneNumber to, const std::string &text)
+    {
+        logger.logInfo("Sending message to: ", to, ", text: ", text);
+        context.bts.sendCallTalk(to, text);
+    }
+
+
+
     void TalkingState::handleUnknownRecipient(common::PhoneNumber from)
     {
         logger.logError("Unexpected UnknownRecipient from: ", from);

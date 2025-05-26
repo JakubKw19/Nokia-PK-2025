@@ -43,6 +43,7 @@ public:
     void handleUserReject() override;
     void handleUserHangUp() override;
     void handleDial(common::PhoneNumber to) override;
+    void handleMessageSend(common::PhoneNumber to, const std::string &text) override;
 
 private:
     Context context;

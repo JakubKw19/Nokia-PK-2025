@@ -20,6 +20,7 @@ public:
     virtual void handleUserAccept() = 0;
     virtual void handleUserReject() = 0;
     virtual void handleUserHangUp() = 0;
+    virtual void handleMessageSend(common::PhoneNumber to, const std::string &text) = 0;
 };
 
 class IUserPort

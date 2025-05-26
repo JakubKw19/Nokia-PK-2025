@@ -19,6 +19,7 @@ namespace ue
         void handleUnknownRecipient(common::PhoneNumber from) override;
         void handleCallRequest(common::PhoneNumber from) override;
         void handleDial(common::PhoneNumber) override {};
+        void handleMessageSend(common::PhoneNumber to, const std::string &text) override;
 
         // Obsługa timeoutu
         void handleTimeout() override;
