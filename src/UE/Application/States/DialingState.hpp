@@ -6,22 +6,21 @@
 namespace ue
 {
 
-class ComposeSmsState : public BaseState
+class DialingState : public BaseState
 {
 public:
-    ComposeSmsState(Context& context, common::PhoneNumber to, const std::string &text);
-    void handleComposeSms(common::PhoneNumber to, const std::string &text);
-    void start();
-    void handleSmsSend() override;
+    DialingState(Context& context, common::PhoneNumber callee);
+
     void handleCallAccepted(common::PhoneNumber from) override;
     void handleCallDropped(common::PhoneNumber from) override;
     void handleUnknownRecipient(common::PhoneNumber from) override;
+    void handleTimeout() override;
+    void handleUserReject();
     void handleDial(common::PhoneNumber) override {};
+    void handleUserHangUp() override;
+
 private:
-    common::PhoneNumber to;
-    std::string message;
+    common::PhoneNumber callee;
 };
-
-
 
 }

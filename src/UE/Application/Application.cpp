@@ -78,4 +78,64 @@ void Application::markSmsAsRead(size_t index)
     context.state->markSmsAsRead(index);
 }
 
+void Application::handleCallAccepted(common::PhoneNumber from)
+{
+    context.state->handleCallAccepted(from);
+}
+
+void Application::handleCallDropped(common::PhoneNumber from)
+{
+    context.state->handleCallDropped(from);
+}
+
+void Application::handleUnknownRecipient(common::PhoneNumber from)
+{
+    context.state->handleUnknownRecipient(from);
+}
+
+void Application::handleCallRequest(common::PhoneNumber to)
+{
+    context.state->handleCallRequest(to);
+}
+
+void Application::handleUserAccept()
+{
+    context.state->handleUserAccept();
+}
+
+void Application::handleUserReject()
+{
+    context.state->handleUserReject();
+}
+
+void Application::handleUserHangUp()
+{
+    context.state->handleUserHangUp();
+}
+
+void Application::handleDial(common::PhoneNumber to)
+{
+    context.state->handleDial(to);
+}
+
+void Application::handleMessageSend(common::PhoneNumber to, const std::string &text)
+{
+    context.state->handleMessageSend(to, text);
+}
+
+void Application::handleReceiveCallTalk(common::PhoneNumber from, const std::string &text)
+{
+    context.state->handleReceiveCallTalk(from, text);
+}
+
+
+
+/*
+void Application::handleCallRequest(common::PhoneNumber to)
+{
+    logger.logInfo("Handling call request to ", to);
+    IBtsPort.sendCallRequest(to);
+}*/
+
+
 }

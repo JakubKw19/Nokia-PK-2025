@@ -37,4 +37,19 @@ void ConnectingState::handleDisconnect()
     context.logger.logInfo("Disconnected");
 }
 
+void ConnectingState::handleCallAccepted(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored CallAccepted in ConnectingState from: ", from);
+}
+
+void ConnectingState::handleCallDropped(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored CallDropped in ConnectingState from: ", from);
+}
+
+void ConnectingState::handleUnknownRecipient(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored UnknownRecipient in ConnectingState from: ", from);
+}
+
 }

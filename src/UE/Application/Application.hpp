@@ -35,6 +35,17 @@ public:
     void handleDisconnect() override;
     void handleSmsSend() override;
     void markSmsAsRead(size_t index) override;
+    void handleCallAccepted(common::PhoneNumber from) override;
+    void handleCallDropped(common::PhoneNumber from) override;
+    void handleUnknownRecipient(common::PhoneNumber from) override;
+    void handleCallRequest(common::PhoneNumber to) override;
+    void handleUserAccept() override;
+    void handleUserReject() override;
+    void handleUserHangUp() override;
+    void handleDial(common::PhoneNumber to) override;
+    void handleMessageSend(common::PhoneNumber to, const std::string &text) override;
+    void handleReceiveCallTalk(common::PhoneNumber from, const std::string &text) override;
+
 private:
     Context context;
     common::PrefixedLogger logger;

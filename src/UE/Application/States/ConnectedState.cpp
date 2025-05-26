@@ -2,6 +2,8 @@
 #include "ComposeSmsState.hpp"
 #include "NotConnectedState.hpp"
 #include "ViewSmsState.hpp"
+#include "DialingState.hpp"
+#include "RingingState.hpp"
 
 namespace ue
 {
@@ -45,6 +47,33 @@ void ConnectedState::handleSmsReceived(common::PhoneNumber from, std::string tex
 void ConnectedState::markSmsAsRead(size_t index)
 {
     context.smsDb.markAsRead(index);
+}
+
+void ConnectedState::handleDial(common::PhoneNumber to)
+{
+    context.setState<DialingState>(to);
+}
+void ConnectedState::handleCallAccepted(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored CallAccepted in ConnectedState from: ", from);
+}
+
+void ConnectedState::handleCallDropped(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored CallDropped in ConnectedState from: ", from);
+}
+
+void ConnectedState::handleUnknownRecipient(common::PhoneNumber from)
+{
+    logger.logDebug("Ignored UnknownRecipient in ConnectedState from: ", from);
+}
+
+void ConnectedState::handleCallRequest(common::PhoneNumber from)
+{
+    logger.logInfo("Handling call request from: ", from);
+    context.user.showDialing(from);
+    context.bts.sendCallRequest(from);
+    context.setState<RingingState>(from);
 }
 
 
