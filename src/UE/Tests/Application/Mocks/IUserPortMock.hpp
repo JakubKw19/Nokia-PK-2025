@@ -37,6 +37,9 @@ public:
     MOCK_METHOD(void, showMessage, (const std::string&), (override));
     MOCK_METHOD(void, showCallRequest, (common::PhoneNumber), (override));
     MOCK_METHOD(void, showTalking, (common::PhoneNumber), (override));
+    MOCK_METHOD(void, addMessageFromCall, (common::PhoneNumber from, const std::string& text), (override));
+    MOCK_METHOD(void, clearCallMode, (), (override));
+    
 };
 
 }

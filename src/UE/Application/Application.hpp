@@ -44,6 +44,7 @@ public:
     void handleUserHangUp() override;
     void handleDial(common::PhoneNumber to) override;
     void handleMessageSend(common::PhoneNumber to, const std::string &text) override;
+    void handleReceiveCallTalk(common::PhoneNumber from, const std::string &text) override;
 
 private:
     Context context;

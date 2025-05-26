@@ -123,6 +123,12 @@ void Application::handleMessageSend(common::PhoneNumber to, const std::string &t
     context.state->handleMessageSend(to, text);
 }
 
+void Application::handleReceiveCallTalk(common::PhoneNumber from, const std::string &text)
+{
+    context.state->handleReceiveCallTalk(from, text);
+}
+
+
 
 /*
 void Application::handleCallRequest(common::PhoneNumber to)

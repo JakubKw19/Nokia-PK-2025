@@ -1,5 +1,6 @@
 #include "TalkingState.hpp"
 #include "ConnectedState.hpp"
+#include "UeGui/ICallMode.hpp"
 
 namespace ue
 {
@@ -16,6 +17,7 @@ namespace ue
     void TalkingState::handleUserHangUp()
     {
         logger.logInfo("User ended call with: ", interlocutor);
+        context.user.clearCallMode();
         context.bts.sendCallDropped(interlocutor);
         context.setState<ConnectedState>();
     }
@@ -27,9 +29,11 @@ namespace ue
 
     void TalkingState::handleCallDropped(common::PhoneNumber from)
     {
+        context.user.clearCallMode();
         if (from == interlocutor)
         {
             logger.logInfo("Call dropped by interlocutor: ", from);
+            
             context.user.showMessage("Call ended by interlocutor");
             context.setState<ConnectedState>();
         }
@@ -64,6 +68,19 @@ namespace ue
         context.user.showMessage("Call time limit reached");
         context.bts.sendCallDropped(interlocutor);
         context.setState<ConnectedState>();
+    }
+
+    void TalkingState::handleReceiveCallTalk(common::PhoneNumber from, const std::string &text)
+    {
+        if (from == interlocutor)
+        {
+            logger.logInfo("Received message from: ", from, ", text: ", text);
+            context.user.addMessageFromCall(from, text);
+        }
+        else
+        {
+            logger.logError("Received message from unknown number: ", from);
+        }
     }
 
 }

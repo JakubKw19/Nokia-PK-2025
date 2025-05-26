@@ -47,6 +47,7 @@ void DialingState::handleTimeout()
 void DialingState::handleUserReject()
 {
     logger.logInfo("User cancelled call");
+    context.user.clearCallMode();
     context.timer.stopTimer();
     context.bts.sendCallDropped(callee);
     context.setState<ConnectedState>();
@@ -55,6 +56,7 @@ void DialingState::handleUserReject()
 void DialingState::handleUserHangUp() {
     logger.logInfo("User cancelled call before it was answered");
     context.timer.stopTimer();
+    context.user.clearCallMode();
     context.bts.sendCallDropped(callee);
     context.setState<ConnectedState>();
 }

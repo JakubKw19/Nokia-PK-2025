@@ -22,6 +22,7 @@ namespace ue
         void showCallRequest(common::PhoneNumber from) override {}
         void showTalking(common::PhoneNumber interlocutor) override {}
         void sendCallTalk(common::PhoneNumber, const std::string&) override;
+        
     private:
         void handleMessage(BinaryMessage msg);
         void handleDisconnect();

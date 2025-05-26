@@ -43,6 +43,7 @@ void UserPort::showConnecting()
 
 void UserPort::showConnected()
 {
+    callMode = nullptr;
     IUeGui::IListViewMode& menu = gui.setListViewMode();
     menu.clearSelectionList();
     menu.addSelectionListItem("Compose SMS", "");
@@ -53,6 +54,7 @@ void UserPort::showConnected()
         if (!ok) return;
         if (index == 0) {
             IUeGui::ISmsComposeMode& smsCompose = gui.setSmsComposeMode();
+            smsCompose.clearSmsText();
             gui.setAcceptCallback([this, &smsCompose]() {
                 this->to = smsCompose.getPhoneNumber();
                 this->message = smsCompose.getSmsText();
@@ -185,15 +187,38 @@ void UserPort::showTalking(common::PhoneNumber interlocutor)
    //  view.addSelectionListItem("End call", "");
    //
    //
-   IUeGui::ICallMode& callMode = gui.setCallMode();
-   gui.setAcceptCallback([this, &callMode, interlocutor]() {
+
+   callMode = &gui.setCallMode();
+   if (callMode) {
+    callMode->clearIncomingText();
+    callMode->clearOutgoingText();
+   }    
+   gui.setAcceptCallback([this, interlocutor]() {
     common::PhoneNumber number = interlocutor;
-    handler->handleMessageSend(number, callMode.getOutgoingText());
+    callMode->appendIncomingText(common::to_string(phoneNumber) + ": " + callMode->getOutgoingText());
+    handler->handleMessageSend(number, callMode->getOutgoingText());
+    callMode->clearOutgoingText();
    });
    gui.setRejectCallback([this]() {
     handler->handleUserHangUp();
    });
 }
+
+void UserPort::addMessageFromCall(common::PhoneNumber from, const std::string& text) {
+    if (callMode) {
+        std::string label = common::to_string(from);
+        callMode->appendIncomingText(label + ": " + text);
+    }
+}
+
+void UserPort::clearCallMode() {
+    if (callMode) {
+        callMode->clearIncomingText();
+        callMode->clearOutgoingText();
+        callMode = nullptr;
+    }
+}
+
 
 
 }

@@ -67,6 +67,9 @@ public:
     void handleMessageSend(common::PhoneNumber to, const std::string &text) override {
         logger.logInfo("baseState: handleMessageSend called (default)");
     }
+    void handleReceiveCallTalk(common::PhoneNumber from, const std::string &text) override {
+        logger.logInfo("baseState: handleReceiveCallTalk called (default)");
+    }
 
 
 protected:

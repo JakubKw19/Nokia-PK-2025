@@ -24,6 +24,8 @@ public:
     void showTalking(common::PhoneNumber interlocutor) override;
     void showCallRequest(common::PhoneNumber from) override;
     void handleDial(common::PhoneNumber to);
+    void addMessageFromCall(common::PhoneNumber from, const std::string& text) override;
+    void clearCallMode() override;
     // common::PhoneNumber getRecipientPhoneNumber() const
     // {
     //     return this->to;
@@ -39,6 +41,7 @@ private:
     IUserEventsHandler* handler = nullptr;
     common::PhoneNumber to;
     std::string message;
+    IUeGui::ICallMode* callMode = nullptr;
 };
 
 }

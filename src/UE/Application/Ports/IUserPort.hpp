@@ -35,6 +35,8 @@ public:
     virtual void showMessage(const std::string& text) = 0;
     virtual void showCallRequest(common::PhoneNumber from) = 0;
     virtual void showTalking(common::PhoneNumber interlocutor) = 0;
+    virtual void addMessageFromCall(common::PhoneNumber from, const std::string& text) = 0;
+    virtual void clearCallMode() = 0;
     // virtual common::PhoneNumber getRecipientPhoneNumber() const = 0;
     // virtual std::string getSmsText() const = 0;
 };

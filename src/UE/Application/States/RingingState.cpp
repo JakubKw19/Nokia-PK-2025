@@ -25,6 +25,7 @@ namespace ue
     void RingingState::handleUserReject()
     {
         logger.logInfo("User rejected call from: ", caller);
+        context.user.clearCallMode();
         context.timer.stopTimer();
         context.bts.sendCallDropped(caller);
         context.setState<ConnectedState>();
