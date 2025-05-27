@@ -68,8 +68,28 @@ void BtsPort::handleMessage(BinaryMessage msg)
         }
         case common::MessageId::UnknownRecipient:
         {
-            handler->handleUnknownRecipient(from);
+            auto messageHeader = reader.readMessageHeader();
+            switch (messageHeader.messageId) {
+            case common::MessageId::Sms:
+                logger.logError("Failed to send SMS – Recipient not found: ",
+                                messageHeader.to);
+                break;
+            case common::MessageId::CallRequest:
+                logger.logError("Failed to send call request – Recipient not found: ",
+                                messageHeader.to);
+                handler->handleUnknownRecipient(messageHeader.to);
+                break;
+            case common::MessageId::CallTalk:
+                logger.logError("Failed to send call request – Recipient not found: ",
+                                messageHeader.to);
+                break;
+            default:
+                logger.logError("Failed to send message – Recipient not found: ",
+                                messageHeader.to);
+                break;
+            }
             break;
+            
         }
         case common::MessageId::Sms:
             {
