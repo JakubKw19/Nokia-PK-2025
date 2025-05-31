@@ -15,6 +15,7 @@ public:
     void handleCallDropped(common::PhoneNumber from) override;
     void handleUnknownRecipient(common::PhoneNumber from) override;
     void handleDial(common::PhoneNumber) override {};
+    void handleDisconnect() override;
 };
 
 }
