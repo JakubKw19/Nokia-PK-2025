@@ -32,6 +32,11 @@ void NotConnectedState::handleCallDropped(common::PhoneNumber from)
 void NotConnectedState::handleUnknownRecipient(common::PhoneNumber from)
 {
     logger.logDebug("Ignored UnknownRecipient from ", from, " in NotConnectedState");
+
+}
+void NotConnectedState::handleDisconnect()
+{
+    context.user.showNotConnected();
 }
 
 

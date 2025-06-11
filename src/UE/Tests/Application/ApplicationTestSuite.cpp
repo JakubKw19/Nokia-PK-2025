@@ -19,7 +19,7 @@ protected:
     const common::PhoneNumber PHONE_NUMBER{112};
     NiceMock<common::ILoggerMock> loggerMock;
     StrictMock<IBtsPortMock> btsPortMock;
-    StrictMock<IUserPortMock> userPortMock;
+    NiceMock<IUserPortMock> userPortMock;
     StrictMock<ITimerPortMock> timerPortMock;
 
     Application objectUnderTest{PHONE_NUMBER,
@@ -34,6 +34,8 @@ struct ApplicationNotConnectedTestSuite : ApplicationTestSuite
 
 TEST_F(ApplicationNotConnectedTestSuite, todo)
 {
+    EXPECT_CALL(userPortMock, showNotConnected());
+    objectUnderTest.handleDisconnect();
 }
 
 }
